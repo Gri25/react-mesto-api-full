@@ -27,8 +27,8 @@ router.get('/users/me', auth, getUserMe);
 
 router.get('/users/:id', auth, validationUserId, sendUser);
 
-router.post('/signup', validationRegister, createUser);
+router.post('/sign-up', validationRegister, createUser);
 
-router.post('/signin', validationLogin, login);
+router.post('/sign-in', validationLogin, login);
 
 module.exports = router;
