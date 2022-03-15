@@ -93,9 +93,8 @@ class Api {
 
 //Сервер
 const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-27",
+  url: "http://mesto.grisha.nomoredomain.nomoredomains.work",
   headers: {
-    authorization: "5b7d2295-74cc-4a03-be9c-30bb2cf17786",
     "Content-type": "application/json",
   },
 });
