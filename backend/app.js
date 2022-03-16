@@ -12,10 +12,7 @@ require('dotenv').config();
 const { PORT = 3000 } = process.env;
 
 const app = express();
-app.use(cors({
-  origin: 'https://mesto.grisha.nomoredomains.work',
-  credentials: true,
-}));
+app.use(cors());
 
 app.use(express.json());
 
