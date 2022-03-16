@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://mesto.grisha.nomoredomain.nomoredomains.work';
+export const BASE_URL = 'https://mesto.grisha.nomoredomain.nomoredomains.work';
 
 const checkResponse = response => {
   return response.ok ? response.json() : Promise.reject(`Ошибка: ${response.statusText}`);

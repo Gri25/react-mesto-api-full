@@ -93,7 +93,7 @@ class Api {
 
 //Сервер
 const api = new Api({
-  url: "http://mesto.grisha.nomoredomain.nomoredomains.work",
+  url: "https://mesto.grisha.nomoredomain.nomoredomains.work",
   headers: {
     "Content-type": "application/json",
   },

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const { errors } = require('celebrate');
 const routesUser = require('./routes/users');
 const routerCard = require('./routes/cards');
@@ -11,6 +12,10 @@ require('dotenv').config();
 const { PORT = 3000 } = process.env;
 
 const app = express();
+app.use(cors({
+  origin: 'https://mesto.grisha.nomoredomains.work',
+  credentials: true,
+}));
 
 app.use(express.json());
 
