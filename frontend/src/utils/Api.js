@@ -5,27 +5,36 @@ class Api {
   }
 
   //Карточки
-  getCard() {
+  getCard(token) {
     return fetch(`${this._url}/cards`, {
       method: "GET",
-      headers: this._headers,
+      headers: { 
+        ...this._headers, 
+        'Authorization': `Bearer ${token}`
+      },
     }).then(this._checkAnswer);
   }
 
   //Профиль
-  getPersonalInfo() {
+  getPersonalInfo(token) {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: { 
+        ...this._headers, 
+        'Authorization': `Bearer ${token}`
+      },
     }).then(this._checkAnswer);
   }
 
-  changeUserInfo({ name, about }) {
+  changeUserInfo({ name, about }, token) {
     // console.log(name);
     // console.log(about);
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { 
+        ...this._headers, 
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: name,
         about: about,
@@ -33,10 +42,13 @@ class Api {
     }).then(this._checkAnswer);
   }
 
-  addNewCard({ name, link }) {
+  addNewCard({ name, link }, token) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: { 
+        ...this._headers, 
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: name,
         link: link,
@@ -44,17 +56,23 @@ class Api {
     }).then(this._checkAnswer);
   }
 
-  removeCard(cardId) {
+  removeCard(cardId, token) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: { 
+        ...this._headers, 
+        'Authorization': `Bearer ${token}`
+      },
     }).then(this._checkAnswer);
   }
 
-  editAvatarUser(url) {
+  editAvatarUser(url, token) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { 
+        ...this._headers, 
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({
         avatar: url,
       }),
@@ -76,10 +94,13 @@ class Api {
   }
 */
   //Лайки
-  changeLikeCardStatus(cardId, isLiked) {
+  changeLikeCardStatus(cardId, isLiked, token) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: isLiked ? "PUT" : "DELETE",
-      headers: this._headers,
+      headers: { 
+        ...this._headers, 
+        'Authorization': `Bearer ${token}`
+      },
     }).then(this._checkAnswer);
   }
 

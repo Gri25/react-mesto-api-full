@@ -15,6 +15,7 @@ import AddPlacePopup from "./profile/AddPlacePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Header from "./Header";
 import BurgerMenu from "./profile/BurgerMenu";
+import { getToken } from "../utils/utils";
 
 const App = () => {
   const history = useHistory();
@@ -170,7 +171,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    Promise.all([api.getPersonalInfo(), api.getCard()])
+    Promise.all([api.getPersonalInfo(getToken('token')), api.getCard(getToken('token'))])
       .then(([user, data]) => {
         setcurrentUser(user);
         setCards(data);
@@ -185,7 +186,7 @@ const App = () => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
-      .changeLikeCardStatus(card._id, !isLiked)
+      .changeLikeCardStatus(card._id, !isLiked, getToken('token'))
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -206,7 +207,7 @@ const App = () => {
     element.preventDefault();
     // Отправляем запрос в API
     api
-      .removeCard(cardForDelete._id)
+      .removeCard(cardForDelete._id, getToken('token'))
       .then(() => {
         // Методом фильтр мы создаем новый массив на основе нашего только с некоторыми условиями
         setCards(cards.filter((c) => c._id !== cardForDelete._id));
@@ -220,7 +221,7 @@ const App = () => {
 
   const handleUpdateUser = (data) => {
     api
-      .changeUserInfo(data)
+      .changeUserInfo(data, getToken('token'))
       .then((res) => {
         setcurrentUser(res);
         closeAllPopups();
@@ -232,7 +233,7 @@ const App = () => {
 
   const handleUpdateAvatar = (data) => {
     api
-      .editAvatarUser(data.avatarLink)
+      .editAvatarUser(data.avatarLink, getToken('token'))
       .then((res) => {
         setcurrentUser(res);
         closeAllPopups();
@@ -244,7 +245,7 @@ const App = () => {
 
   const handleAddPlaceSubmit = (newCard) => {
     api
-      .addNewCard(newCard)
+      .addNewCard(newCard, getToken('token'))
       .then((res) => {
         setCards([res, ...cards]);
         closeAllPopups();
