@@ -170,8 +170,8 @@ const App = () => {
     setLoggedIn(false);
   };
 
-  useEffect(() => {
-    Promise.all([api.getPersonalInfo(getToken('token')), api.getCard(getToken('token'))])
+  useEffect((token) => {
+    Promise.all([api.getPersonalInfo(getToken(token)), api.getCard(getToken(token))])
       .then(([user, data]) => {
         setcurrentUser(user.data);
         setCards(data.data);
