@@ -171,7 +171,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    Promise.all([api.getPersonalInfo(getToken('token')), api.getCard(getToken('token'))])
+    if(getToken('token')){
+      Promise.all([api.getPersonalInfo(getToken('token')), api.getCard(getToken('token'))])
       .then(([user, data]) => {
         setcurrentUser(user.data);
         setCards(data.data);
@@ -179,7 +180,9 @@ const App = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+    }
+    
+  }, [loggedIn]);
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
