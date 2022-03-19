@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -7,9 +8,7 @@ const routerCard = require('./routes/cards');
 const { NotFoundErr } = require('./errors');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/Logger');
-require('dotenv').config();
-// я честно не понимаю почему ключи совпадают на сервере у меня токен а на локалке у меня его нет
-// я 10 раз перезагружал сервер всё ровно совпадает
+
 const { PORT = 3000 } = process.env;
 
 const app = express();
