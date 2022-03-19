@@ -1,5 +1,5 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
-const { NODE_ENV, JWT_SECRET } = require('dotenv');
 const { UnAutorizedErr, ForbiddenErr } = require('../errors');
 
 module.exports = (req, res, next) => {
